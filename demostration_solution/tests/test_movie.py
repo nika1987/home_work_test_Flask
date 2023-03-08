@@ -29,9 +29,16 @@ def movie_dao():
 class TestMovieService:
     @pytest.fixture(autouse=True)
     def movie_service(self, movie_dao):
+        """
+       Метод создаёт объект класса MovieService
+       :param genre_dao: объект класса MovieDAO
+       """
         self.movie_service = MovieService(dao=movie_dao)
 
     def test_get_all_movies(self):
+        """
+        Метод тестирует весь список объектов класса Movie
+        """
         movies = self.movie_service.get_all()
 
         assert len(movies) > 0
@@ -39,6 +46,9 @@ class TestMovieService:
             assert isinstance(movie, Movie) # проверяем модель экземляра является экземляром класса Movie
 
     def test_get_one(self):
+        """
+        Метод тестирует получение одного объекта класса Movie
+        """
         movie = self.movie_service.get_one(1)
 
         assert movie is not None
@@ -46,6 +56,10 @@ class TestMovieService:
         assert movie.id is not None
 
     def test_create(self):
+        """
+        Метод тестирует созданный один объект класса Movie
+
+        """
         movie_d = {"name": "Ужасы"}
 
         movie = self.movie_service.create(movie_d)
@@ -53,6 +67,17 @@ class TestMovieService:
         assert movie.id is not None
 
     def test_update(self):
+        """
+        Метод тестирует добавленный объект класса Movie
+
+        """
         movie_d = {"name": "Комедия"}
 
         assert self.movie_service.update(movie_d) is not None
+
+    def test_delete(self, one=None):
+        """
+        Метод тестирует удаленный  объект класса Movie
+        """
+        movie = self.movie_service.delete(one)
+        assert movie is None

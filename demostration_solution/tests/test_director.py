@@ -55,7 +55,7 @@ class TestGenreService:
     def test_create(self):
         """
         Метод тестирует созданный один объект класса Director
-        :return:
+
         """
         director_d = {"name": "Джейн Камерон"}
 
@@ -70,3 +70,10 @@ class TestGenreService:
         director_d = {"id": 1, "name": "Алексей Михалковский"}
 
         assert self.director_service.update(director_d) is not None
+
+    def test_delete(self, one=None):
+        """
+        Метод тестирует удаленный  объект класса Director
+        """
+        director = self.director_service.delete(one)
+        assert director is None

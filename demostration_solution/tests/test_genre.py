@@ -73,3 +73,10 @@ class TestGenreService:
         genre_d = {"id": 1, "name": "Комедия"}
 
         assert self.genre_service.update(genre_d) is not None
+
+    def test_delete(self, one=None):
+        """
+        Метод тестирует удаленный  объект класса Genre
+        """
+        genre = self.genre_service.delete(one)
+        assert genre is None
